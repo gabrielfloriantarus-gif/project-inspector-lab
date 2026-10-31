@@ -1,0 +1,19 @@
+name: Cloud smoke test
+on:
+  push:
+    branches:
+      - lia/cloud-workspace-setup
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run smoke test
+        run: node scripts/smoke-test.js
